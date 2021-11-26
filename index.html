@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Uploading</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   
+
+<div class="container1">
+    <!-- The container -->
+    <div class="container1__wrapper">
+        <!-- The ribbon -->
+        <div class="container__ribbon">
+            <div class="header">File Upload</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h1>PLEASE UPLOAD YOU FILE BELOW</h1>
+        
+    <div class="file">
+        
+       
+        <label class="uploadLabel">
+            <input type="file" class="uploadButton" id="ip-file"/>
+            Upload
+        </label>
+        <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase.js"></script>
+        <script>
+            
+            var  firebaseConfig = {
+                    apiKey: "AIzaSyALRsj0bdHdS0oGtOI9CD10RGSqL7EWgfI",
+                    authDomain: "upload-4fd15.firebaseapp.com",
+                    projectId: "upload-4fd15",
+                    storageBucket: "upload-4fd15.appspot.com",
+                    messagingSenderId: "112108834358",
+                    appId: "1:112108834358:web:406cee844f2c9c9fe91297",
+                    measurementId: "G-LDTCBM5QK5"
+            };
+                    
+            firebase.initializeApp(firebaseConfig);
+            
+            let fileInput = document.getElementById('ip-file');
+        
+            fileInput.addEventListener('change', inputListener);
+        
+            function inputListener(e) {
+                e.preventDefault();
+                    
+                var fileButton = document.getElementById('fileButton');
+                //Get file
+                var file = e.target.files[0];
+    
+                //Create a Storage ref
+                var storageRef = firebase.storage().ref('folder_name/'+file.name);
+    
+            //Upload file
+            var task = storageRef.put(file);
+             task.on('state_changed', function(e){
+              alert('File upload Successfully')
+            },function(error){
+              alert('Alternate Message:- Sorry File cannot be uploaded')
+            });
+        
+            }
+        
+        </script>
+        
+    </div>
+</div>
+
+    </body>
+</html>
